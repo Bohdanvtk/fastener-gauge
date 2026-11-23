@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Проміжні результати
+debug/
+
+# IDE
+.idea/workspace.xml
+.idea/shelf/
+
+# Фото HEIC НЕ ігноруємо — це вихідні дані експерименту
