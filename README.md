@@ -1,33 +1,33 @@
 # fastener-gauge
 
-Вимірювання й визначення метричних гвинтів з одного фото телефона на аркуші з ArUco-маркерами.
-Калібрована камера → гомографія площини → міліметри → найближчий стандартний розмір.
+Measuring and identifying metric screws from a single phone photo on a sheet with ArUco markers.
+Calibrated camera → plane homography → millimetres → nearest standard size.
 
-> Заготовка. Результати з'являться після експериментів.
+> Work in progress. Results will appear after the experiments.
 
-## Як це працює
-_TODO: схема конвеєра (undistort → ArUco → гомографія → сегментація → вимір → стандарт)._
+## How it works
+_TODO: pipeline diagram (undistort → ArUco → homography → segmentation → measurement → standard)._
 
-## Результати
-_TODO: X/N гвинтів визначено правильно, похибка Ø і довжини ±Y мм (еталон — штангенциркуль ±0.2 мм)._
+## Results
+_TODO: X/N screws identified correctly, Ø and length error ±Y mm (reference: caliper ±0.2 mm)._
 
-| Експеримент | Правильно | Похибка Ø, мм | Похибка L, мм |
+| Experiment | Correct | Ø error, mm | L error, mm |
 |---|---|---|---|
-| зверху, без undistort | | | |
-| зверху, з undistort | | | |
+| top-down, no undistort | | | |
+| top-down, with undistort | | | |
 | ~20° | | | |
 | ~40° | | | |
 
-## Де ламається і чому
-_TODO: відблиски нержавійки, паралакс від висоти головки, рівність аркуша._
+## Where it breaks and why
+_TODO: stainless steel glare, parallax from head height, sheet flatness._
 
-## Як би це виглядало на лінії
-_TODO: фіксована камера, підсвітка знизу, телецентричний об'єктив._
+## What it would look like on a production line
+_TODO: fixed camera, backlight, telecentric lens._
 
-## Запуск
+## Usage
 ```bash
 pip install -r requirements.txt
-python make_sheet.py        # аркуш для друку (друкувати на 100%)
+python make_sheet.py        # sheet for printing (print at 100%)
 python rectify.py ...       # TODO
 python measure.py ...       # TODO
 python evaluate.py ...      # TODO

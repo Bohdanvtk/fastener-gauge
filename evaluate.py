@@ -1,8 +1,8 @@
-"""Крок 6: порівняння вимірів з ground_truth.csv (штангенциркуль).
+"""Step 6: compare measurements with ground_truth.csv (caliper).
 
-TODO (пишу сам):
-1. Гвинти лежать рядами → відсортувати детекції (рядок за y, потім x) і присвоїти id.
-2. Зіставити з ground_truth.csv (id,nominal,d_caliper_mm,L_caliper_mm).
-3. Метрики: частка правильних підписів (X/N), похибка Ø і L у мм (середня, max, std).
-4. Таблиця для README; запуск для кожного експерименту (з/без undistort, кути 0°/20°/40°).
+TODO (written by me):
+1. Screws are laid out in rows -> sort detections (row by y, then x) and assign ids.
+2. Match with ground_truth.csv (id,nominal,d_caliper_mm,L_caliper_mm).
+3. Metrics: share of correct labels (X/N), Ø and L error in mm (mean, max, std).
+4. Table for README; run for each experiment (with/without undistort, angles 0°/20°/40°).
 """

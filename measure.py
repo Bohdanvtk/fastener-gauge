@@ -1,13 +1,13 @@
-"""Крок 3–5: вирівняний аркуш → контури гвинтів → Ø і довжина в мм → найближчий стандарт.
+"""Steps 3–5: rectified sheet -> screw contours -> diameter and length in mm -> nearest standard.
 
-TODO (пишу сам):
-1. Обрізати до crop_zone_mm з sheet_layout.json (x 13–197, y 63–234 мм → ×10 px).
-2. Сірий → cv2.threshold(BINARY_INV + OTSU) → MORPH_CLOSE (заповнити відблиски/шліц).
-3. cv2.findContours(RETR_EXTERNAL), викинути площу < 200 px².
-4. Для кожного контуру: minAreaRect → повернути маску так, щоб вісь гвинта була горизонтальна.
-5. Профіль товщини: count_nonzero по стовпцях.
-   Ø = 95-й перцентиль товщини СТРИЖНЯ (без головки) / 10; довжина = повна довжина / 10
-   (у потайних гвинтів довжина — разом з головкою).
-6. Найближчий стандарт: Ø ∈ {3,4,5,6} ("?" якщо |Δ| > 0.4), L ∈ {6,8,10,12,16,20,25,30} ("?" якщо |Δ| > 1).
-7. Намалювати підписи "M3×20 (3.05/19.8)" → debug/labeled.jpg.
+TODO (written by me):
+1. Crop to crop_zone_mm from sheet_layout.json (x 13–197, y 63–234 mm -> ×10 px).
+2. Grayscale -> cv2.threshold(BINARY_INV + OTSU) -> MORPH_CLOSE (fill glare / slot).
+3. cv2.findContours(RETR_EXTERNAL), drop area < 200 px².
+4. For each contour: minAreaRect -> rotate the mask so the screw axis is horizontal.
+5. Thickness profile: count_nonzero per column.
+   Ø = 95th percentile of SHANK thickness (without head) / 10; length = full length / 10
+   (for countersunk screws the length includes the head).
+6. Nearest standard: Ø ∈ {3,4,5,6} ("?" if |Δ| > 0.4), L ∈ {6,8,10,12,16,20,25,30} ("?" if |Δ| > 1).
+7. Draw labels "M3×20 (3.05/19.8)" -> debug/labeled.jpg.
 """

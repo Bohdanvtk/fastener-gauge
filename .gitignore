@@ -4,11 +4,11 @@ __pycache__/
 .venv/
 venv/
 
-# Проміжні результати
+# Intermediate results
 debug/
 
 # IDE
 .idea/workspace.xml
 .idea/shelf/
 
-# Фото HEIC НЕ ігноруємо — це вихідні дані експерименту
+# HEIC photos are NOT ignored — they are the experiment's raw data

@@ -1,10 +1,10 @@
-"""Генерує вимірювальний аркуш A4 з ArUco-маркерами.
+"""Generates the A4 measurement sheet with ArUco markers.
 
-Масштаб малювання: 10 px = 1 мм → 2100×2970 px.
-Виходи: sheet.pdf (254 DPI → точно 210×297 мм), sheet_preview.png, sheet_layout.json.
+Drawing scale: 10 px = 1 mm -> 2100x2970 px.
+Outputs: sheet.pdf (254 DPI -> exactly 210x297 mm), sheet_preview.png, sheet_layout.json.
 
-УВАГА: аркуш уже надруковано. Не змінюй геометрію (маркери, шкала, зона),
-інакше sheet_layout.json перестане відповідати паперу.
+WARNING: the sheet is already printed. Do not change the geometry (markers, scale, zone),
+otherwise sheet_layout.json will no longer match the paper.
 """
 import json
 
@@ -14,16 +14,16 @@ from PIL import Image
 
 PX_PER_MM = 10
 W_MM, H_MM = 210, 297
-DPI = 254  # 254 DPI = 10 px/мм
+DPI = 254  # 254 DPI = 10 px/mm
 
 ARUCO_DICT = cv2.aruco.DICT_4X4_50
 MARKER_MM = 40
 MARKERS_TL_MM = {0: (10, 10), 1: (160, 10), 2: (10, 247), 3: (160, 247)}
 
 SCALE_Y_MM = 30
-SCALE_X0_MM, SCALE_X1_MM = 55, 155  # 100 мм
+SCALE_X0_MM, SCALE_X1_MM = 55, 155  # 100 mm
 
-ZONE_MM = (10, 60, 200, 237)  # x0, y0, x1, y1 — пунктирна робоча зона
+ZONE_MM = (10, 60, 200, 237)  # x0, y0, x1, y1 — dashed work zone
 CROP_INSET_MM = 3
 
 
@@ -54,13 +54,13 @@ def build_sheet():
     img = np.full((mm(H_MM), mm(W_MM)), 255, np.uint8)
     aruco_dict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT)
 
-    # Маркери
+    # Markers
     side = mm(MARKER_MM)
     for mid, (x, y) in MARKERS_TL_MM.items():
         marker = cv2.aruco.generateImageMarker(aruco_dict, mid, side)
         img[mm(y):mm(y) + side, mm(x):mm(x) + side] = marker
 
-    # Шкала 100 мм із засічками кожні 10 мм (довші на 0/50/100) і дрібні кожні 1 мм
+    # 100 mm scale: ticks every 10 mm (longer at 0/50/100) and small ticks every 1 mm
     y = mm(SCALE_Y_MM)
     x0, x1 = mm(SCALE_X0_MM), mm(SCALE_X1_MM)
     cv2.line(img, (x0, y), (x1, y), 0, 3)
@@ -81,7 +81,7 @@ def build_sheet():
     cv2.putText(img, "fastener-gauge | A4 | print at 100%", (x0 + 120, y + 130),
                 font, 0.9, 0, 2, cv2.LINE_AA)
 
-    # Робоча зона
+    # Work zone
     zx0, zy0, zx1, zy1 = (mm(v) for v in ZONE_MM)
     draw_dashed_rect(img, zx0, zy0, zx1, zy1)
     return img
@@ -91,7 +91,7 @@ def build_layout():
     markers = {}
     for mid, (x, y) in MARKERS_TL_MM.items():
         s = MARKER_MM
-        # порядок кутів як у cv2.aruco detectMarkers: TL, TR, BR, BL
+        # corner order as in cv2.aruco detectMarkers: TL, TR, BR, BL
         markers[str(mid)] = [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
     zx0, zy0, zx1, zy1 = ZONE_MM
     i = CROP_INSET_MM
