@@ -71,8 +71,28 @@ telecentric lens."
 - [x] Sheet printed, screws and caliper bought.
 - [x] Repo structure, `make_sheet.py` (detection of IDs 0–3 on the generated sheet verified).
 - [x] Public GitHub repo: https://github.com/Bohdanvtk/fastener-gauge
+- [x] ArUco IDs 0–3 detected on `sheet_preview.png` with a fresh venv (sanity check, 25 Nov).
 - [ ] 3 photos (top-down, ~20°, ~40°) with 3 screws, all 4 markers in frame, diffuse light.
 - [ ] `rectify.py` — done when: IDs 0–3 found, top.jpg looks like a scan, scale ≈ 1000 px.
 - [ ] `measure.py`
 - [ ] Caliper measurements → `ground_truth.csv`, `evaluate.py`
 - [ ] README with experiment results.
+
+## Session handoff (latest notes for the next Claude session)
+- How to explain to the user: essence first via a real-life analogy (2–3 sentences), then 4–5 concrete
+  numeric examples, then the general rule/code. One idea or question at a time. One focused
+  recommendation, not a list of options. Honest critique, no praise.
+- The user does NOT yet hold the whole project picture in their head. Before details, check
+  understanding of the core scheme one question at a time:
+  pixels → mm has 3 obstacles (distance, tilt/perspective, lens); markers + homography solve
+  the first two; K/undistort is optional and only used for the undistort experiment.
+- Open check question (unanswered): "Why does a lifted marker corner hurt more than a bump in the
+  middle of the sheet?" Expected idea: the marker corners define the homography itself, so the
+  error spreads over the whole sheet; a bump only affects parts lying on it.
+- Shooting checklist (from the first test photo): use a flat copy taped at the corners; no shadows
+  from the hand/phone on the sheet; transfer ORIGINAL HEIC files (messengers compress to ~960×1280).
+- Previous sessions ran in a cloud container (Python 3.13, empty `photos/`). The local machine is
+  Pop!_OS with the Claude desktop app; use the project's `.venv` (Python 3.10).
+- Do not re-suggest rejected project ideas; scope stays ~1 week.
+- Next single step: 3 photos in `photos/` → user writes `rectify.py`; Claude reviews.
+- Still to fill in: the exact caliper value of the 100 mm scale line (see "Sheet" section).
