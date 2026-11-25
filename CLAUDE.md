@@ -57,6 +57,10 @@ nearest standard size.
 - With/without undistort.
 - Shooting angle: top-down / ~20° / ~40°.
 - Limits: stainless steel glare, head height (parallax), sheet flatness.
+  - Flatness: main runs use a flat copy with all 4 corners taped to the table (markers uncovered).
+    The creased copy is kept for the flatness experiment. Rule of thumb (top-down, camera height H):
+    a part raised by h appears longer by ≈ L·h/H (H=300 mm, h=2 mm, L=20 mm → +0.13 mm).
+    A lifted marker corner is worse: it corrupts the homography for the whole sheet.
 
 ## README goal
 "Calibrated the camera → built a homography-based measurement station → verified with a caliper:
